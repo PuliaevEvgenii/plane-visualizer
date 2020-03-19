@@ -8,12 +8,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class Polygon extends Polyline implements Model {
-    private Color color;
+public class Polygon extends Polyline {
+    private float zForColor;
 
-    public Polygon(Collection<Vector3> points, Color color) {
+    public Polygon(Collection<Vector3> points) {
         super(points, true);
-        this.color = color;
+    }
+
+    public Polygon(Collection<Vector3> points, float zForColor) {
+        super(points, true);
+        this.zForColor = zForColor;
     }
 
     @Override
@@ -21,7 +25,7 @@ public class Polygon extends Polyline implements Model {
         return new ArrayList<>(Collections.singletonList(new Polyline(getPoints(), true)));
     }
 
-    public Color getColor() {
-        return color;
+    public float getzForColor() {
+        return zForColor;
     }
 }

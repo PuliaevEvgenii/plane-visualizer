@@ -7,9 +7,9 @@ import javax.swing.JPanel;
 import com.puliaev.graph3d.models.Parallelepiped;
 import com.puliaev.graph3d.utils.screen.colorizers.GradientColorizer;
 import com.puliaev.graph3d.utils.screen.drawers.Drawer;
-import com.puliaev.graph3d.utils.screen.drawers.SimpleEdgeDrawer;
 import com.puliaev.graph3d.utils.screen.fillers.Filler;
-import com.puliaev.graph3d.utils.screen.fillers.SimplePolygonFiller;
+import com.puliaev.graph3d.utils.screen.drawers.SwingGraphicsDrawer;
+import com.puliaev.graph3d.utils.screen.fillers.SwingGraphicsFiller;
 import com.puliaev.graph3d.utils.math.Vector3;
 import com.puliaev.graph3d.models.FunctionModel;
 import com.puliaev.graph3d.utils.screen.ScreenConverter;
@@ -48,8 +48,7 @@ public class DrawPanel extends JPanel implements SimpleCameraController.RepaintL
                 50,
                 50,
                 new Vector3(-10f, -10f, -10f),
-                new Vector3(10f, 10f, 10f),
-                new GradientColorizer()
+                new Vector3(10f, 10f, 10f)
         ));
         
         camController.addRepaintListener(this);
@@ -61,11 +60,14 @@ public class DrawPanel extends JPanel implements SimpleCameraController.RepaintL
     @Override
     public void paint(Graphics g) {
         sc.setScreenSize(getWidth(), getHeight());
+
         BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics2D = (Graphics2D) bi.getGraphics();
-        Drawer drawer = new SimpleEdgeDrawer(sc, graphics2D);
-        Filler filler = new SimplePolygonFiller(sc, graphics2D);
+
+        Drawer drawer = new SwingGraphicsDrawer(sc, graphics2D);
+        Filler filler = new SwingGraphicsFiller(sc, graphics2D, new GradientColorizer());
         filler.showGrid();
+
         scene.drawScene(drawer, filler,  camera);
         g.drawImage(bi, 0, 0, null);
         graphics2D.dispose();

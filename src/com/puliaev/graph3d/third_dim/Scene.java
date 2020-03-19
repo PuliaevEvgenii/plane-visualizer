@@ -64,7 +64,7 @@ public class Scene {
                     /*Создаём на их сонове новые полилинии, но в том виде, в котором их видит камера*/
                     if (pl instanceof Polygon)
 
-                        polygons.add(new Polygon(sPoints, ((Polygon) pl).getColor()));
+                        polygons.add(new Polygon(sPoints, ((Polygon) pl).getzForColor()));
                     else
                         lines.add(new Polyline(sPoints, pl.isClosed()));
                 }

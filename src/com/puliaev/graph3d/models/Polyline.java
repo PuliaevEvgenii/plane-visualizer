@@ -1,15 +1,14 @@
 package com.puliaev.graph3d.models;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
 import com.puliaev.graph3d.utils.math.Vector3;
 
 /**
  * Полилиния в трёхмерном пространстве.
  * Описывает ломанную в трёхмерном пространстве по опорным точкам
  */
-public class Polyline {
+public class Polyline implements Model {
     private List<Vector3> points;
     private boolean closed;
 
@@ -38,7 +37,12 @@ public class Polyline {
     public List<Vector3> getPoints() {
         return points;
     }
-    
+
+    @Override
+    public List<Polyline> getLines() {
+        return new ArrayList<>(Collections.singletonList(new Polyline(getPoints(), closed)));
+    }
+
     /**
      * Вычисляет среднее арифметическое по оси Z.
      * @return среднее по Z для полилинии.

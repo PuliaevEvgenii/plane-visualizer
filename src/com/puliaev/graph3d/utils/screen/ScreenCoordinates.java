@@ -1,12 +1,17 @@
 package com.puliaev.graph3d.utils.screen;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Хранит составляющие экранных координат раздельно.
  */
 public class ScreenCoordinates {
     private int[] xx, yy;
+
     /**
      * Создаёт экзмпляр на основе коллекции экранных точек
      * @param points точки
@@ -14,12 +19,14 @@ public class ScreenCoordinates {
     public ScreenCoordinates(Collection<ScreenPoint> points) {
         xx = new int[points.size()];
         yy = new int[points.size()];
+
         int i = 0;
         for (ScreenPoint p : points) {
             xx[i] = p.getI();
             yy[i] = p.getJ();
             i++;
         }
+
     }
 
     public int[] getXx() {
@@ -29,7 +36,7 @@ public class ScreenCoordinates {
     public int[] getYy() {
         return yy;
     }
-    
+
     /**
      * Количество точек
      * @return количество точек

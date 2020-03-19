@@ -3,6 +3,7 @@ package com.puliaev.graph3d.utils.screen.fillers;
 import com.puliaev.graph3d.models.Polygon;
 import com.puliaev.graph3d.utils.screen.Filter;
 import com.puliaev.graph3d.utils.screen.ScreenConverter;
+import com.puliaev.graph3d.utils.screen.colorizers.Colorizer;
 
 import java.awt.*;
 import java.util.*;
@@ -13,26 +14,16 @@ import java.util.List;
  */
 public abstract class ScreenGraphicsFiller implements Filler {
     private ScreenConverter sc;
-    private Graphics2D gr;
+    private Colorizer colorizer;
     private boolean showGrid;
 
     /**
      * Создаёт экземпляр заполнителя
      * @param sc преобразователь координат
-     * @param gr графикс
      */
-    public ScreenGraphicsFiller(ScreenConverter sc, Graphics2D gr) {
+    public ScreenGraphicsFiller(ScreenConverter sc, Colorizer colorizer) {
+        this.colorizer = colorizer;
         this.sc = sc;
-        this.gr = gr;
-    }
-
-    @Override
-    public void clear(int color) {
-        Graphics2D g = getGraphics2D();
-        Color c = g.getColor();
-        g.setColor(new Color(color));
-        g.fillRect(0, 0, sc.getWs(), sc.getHs());
-        g.setColor(c);
     }
 
     @Override
@@ -70,8 +61,8 @@ public abstract class ScreenGraphicsFiller implements Filler {
         return sc;
     }
 
-    public Graphics2D getGraphics2D() {
-        return gr;
+    public Colorizer getColorizer() {
+        return colorizer;
     }
 
     @Override

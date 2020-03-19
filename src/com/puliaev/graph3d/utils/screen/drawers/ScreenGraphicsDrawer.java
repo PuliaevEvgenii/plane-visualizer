@@ -17,16 +17,13 @@ import com.puliaev.graph3d.models.Polyline;
  */
 public abstract class ScreenGraphicsDrawer implements Drawer {
     private ScreenConverter sc;
-    private Graphics2D gr;
 
     /**
      * Создаёт экземпляр рисвальщика
      * @param sc преобразователь координат
-     * @param gr графикс
      */
-    public ScreenGraphicsDrawer(ScreenConverter sc, Graphics2D gr) {
+    public ScreenGraphicsDrawer(ScreenConverter sc) {
         this.sc = sc;
-        this.gr = gr;
     }
     
     @Override
@@ -43,16 +40,7 @@ public abstract class ScreenGraphicsDrawer implements Drawer {
             oneDraw(pl);
         }
     }
-    
-    @Override
-    public void clear(int color) {
-        Graphics2D g = getGraphics2D();
-        Color c = g.getColor();
-        g.setColor(new Color(color));
-        g.fillRect(0, 0, sc.getWs(), sc.getHs());
-        g.setColor(c);
-    }
-    
+
     /**
      * Метод, умеющий рсовать одну полилинию
      * @param polyline полилиния, которую требуется нарисовать
@@ -72,10 +60,6 @@ public abstract class ScreenGraphicsDrawer implements Drawer {
      * @return компаратор
      */
     protected abstract Comparator<Polyline> getComparator();
-
-    public Graphics2D getGraphics2D() {
-        return gr;
-    }
 
     public ScreenConverter getScreenConverter() {
         return sc;

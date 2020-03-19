@@ -15,10 +15,12 @@ import com.puliaev.graph3d.models.Polyline;
 /**
  * Реализация рисователя полигонов с помощью рёбер.
  */
-public class SimpleEdgeDrawer extends ScreenGraphicsDrawer {
+public class SwingGraphicsDrawer extends ScreenGraphicsDrawer {
+    private Graphics2D graphics2D;
 
-    public SimpleEdgeDrawer(ScreenConverter sc, Graphics2D g) {
-        super(sc, g);
+    public SwingGraphicsDrawer(ScreenConverter sc, Graphics2D graphics2D) {
+        super(sc);
+        this.graphics2D = graphics2D;
     }
 
     /**
@@ -45,6 +47,16 @@ public class SimpleEdgeDrawer extends ScreenGraphicsDrawer {
 
         getGraphics2D().drawPolyline(crds.getXx(), crds.getYy(), crds.size());
     }
+
+    @Override
+    public void clear(int color) {
+        Graphics2D g = getGraphics2D();
+        Color c = g.getColor();
+        g.setColor(new Color(color));
+        g.fillRect(0, 0, getScreenConverter().getWs(), getScreenConverter().getHs());
+        g.setColor(c);
+    }
+
 
     /**
      * В данной реализации возвращаем фильтр, который одобряет все полилинии.
@@ -77,5 +89,8 @@ public class SimpleEdgeDrawer extends ScreenGraphicsDrawer {
             }
         };
     }
-    
+
+    public Graphics2D getGraphics2D() {
+        return graphics2D;
+    }
 }
